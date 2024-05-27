@@ -41,7 +41,7 @@ const ExpenseDialog = ({
         ID.unique(),
         file
     );
-    return `https://cloud.appwrite.io/v1/storage/buckets/${appwriteConfig.STORAGE_COLLECTION_ID}/files/${result["$id"]}/view?project=663bc860002b4e15d7fe&mode=admin`;
+    return `https://cloud.appwrite.io/v1/storage/buckets/${appwriteConfig.STORAGE_COLLECTION_ID}/files/${result["$id"]}/view?project=663bc860002b4e15d7fe&mode=admin`
   }
 
   const handleAddTransaction = async (e: FormEvent<HTMLFormElement>) => {

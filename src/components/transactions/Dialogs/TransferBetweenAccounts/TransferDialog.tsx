@@ -8,7 +8,7 @@ import {
   Dispatch,
   FormEvent,
   SetStateAction,
-  useEffect,
+  useEffect, useState,
 } from "react";
 import TransferSelects from "@/components/transactions/Dialogs/TransferBetweenAccounts/TransferSelects.tsx";
 import { useHandleInputsHook } from "@/components/hooks/handleInputsHook/handleInputsHook.tsx";
@@ -19,6 +19,7 @@ const TransferDialog = ({
   isOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
 
+  const [error, setError] = useState<string | null>(null);
 
   const {
     mutateAsync: transferBetweenAccounts,
@@ -39,12 +40,20 @@ const TransferDialog = ({
   const handleTransfer = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    return await transferBetweenAccounts({
-      accountOneId: from as string,
-      accountTwoId: to as string,
-      amount: Number(amount),
-      description: description as string
-    });
+    if(!from || !to) {
+      setError("Requires two accounts to transfer balance between")
+    }
+    else if (from === to) {
+      setError("cannot transfer money between same account")
+    }
+    else {
+      return await transferBetweenAccounts({
+        accountOneId: from as string,
+        accountTwoId: to as string,
+        amount: Number(amount),
+        description: description as string
+      });
+    }
   };
 
   useEffect(() => {
@@ -76,11 +85,20 @@ const TransferDialog = ({
     },
   ];
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   return (
     <TabsContent className="text-white" value="transfer">
+      <p className='text-center font-[700] text-red-500'>{error}</p>
       <form onSubmit={handleTransfer} className="grid gap-4 py-4">
         <div className="flex flex-col">
-          <div className="flex items-center gap-4 justify-center">
+          <div className="lg:flex lg:flex-row flex flex-col items-center gap-4 justify-center">
             <TransferSelects
               transferLabel={"From"}
               transferValue={from as string}
@@ -95,7 +113,7 @@ const TransferDialog = ({
         </div>
         {transferInputAndLabelProps.map(
           ({ htmlFor, label, type, name, id, value, onChange, className }) => (
-            <>
+            <div key={id}>
               <Label htmlFor={htmlFor}>{label}</Label>
               <Input
                 type={type}
@@ -105,7 +123,7 @@ const TransferDialog = ({
                 onChange={onChange}
                 className={className}
               />
-            </>
+            </div>
           ),
         )}
         <DialogFooter>

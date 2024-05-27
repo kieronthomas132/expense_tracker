@@ -3,8 +3,9 @@ import {useAddIncome} from "@/lib/react-query/queries&Mutations.tsx";
 import { useParams } from "react-router";
 import DialogLayout from "@/components/dialogLayout/DialogLayout.tsx";
 import {IDialog} from "@/components/interfaces/interfaces.tsx";
-import {useUserStore} from "@/zustand/UserStore.tsx";
+import {UserProps, useUserStore} from "@/zustand/UserStore.tsx";
 import {useGetWalletHook} from "@/components/hooks/WalletHooks/getWalletHook.tsx";
+import {handleTransaction, uploadIcon} from "@/components/transactions/Functions.tsx";
 
 const IncomeDialog = ({
   handleInputChange,
@@ -26,33 +27,34 @@ const IncomeDialog = ({
 
   const { amount, description, category, icon } = inputs;
 
-  const handleAddIncome = async (e: FormEvent<HTMLFormElement>) => {
+  const handleAddTransaction = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (walletId) {
-      const newIncome = await addIncome({
-        walletId: walletId,
-        transaction: {
-          amount: Number(amount),
-          description: description,
-          icon: icon,
-          category: category,
-          wallet: walletId,
-          walletId: walletId,
-          event: new Date(Date.now()),
-          type: "income",
-          userId: user?.id,
-          currency: wallet?.currency
-        },
-      });
-      setInputs({
-        amount: 100,
-        description: "",
-        category: "",
-        icon: "",
-      });
-      return newIncome;
+    let iconUrl = icon;
+    if (icon) {
+      iconUrl = await uploadIcon(icon);
     }
+
+    const handleAddIncome =  await handleTransaction({
+      currency: wallet?.currency,
+      walletId: walletId as string,
+      amount: amount,
+      description: description,
+      icon: iconUrl,
+      category: category,
+      user: user as UserProps,
+      wallet: walletId as string,
+      type: "income",
+      addFunction: addIncome,
+    });
+
+    setInputs({
+      amount: 100,
+      description: "",
+      category: "",
+      icon: "",
+    });
+    return handleAddIncome
   };
 
   useEffect(() => {
@@ -72,7 +74,7 @@ const IncomeDialog = ({
       categoryLabel="Category"
       categoryValue={category}
       categoryOnChange={handleCategoryChange}
-      formHandleSubmit={handleAddIncome}
+      formHandleSubmit={handleAddTransaction}
       tabType="income"
       isTransactionPending={isTransactionPending}
       defaultStatus="Add Income"

@@ -164,19 +164,17 @@ export const addNewWallet = async (wallet: IWallet) => {
 
 export const deleteWallet = async (walletId: string) => {
   try {
-
     const wallet = await databases.deleteDocument(
       appwriteConfig.DATABASE_ID,
       appwriteConfig.WALLETS_COLLECTION_ID,
       walletId,
     );
 
-    if(!wallet) {
-      new Error("could not delete wallet")
+    if (!wallet) {
+      new Error("could not delete wallet");
     }
 
-    return wallet
-
+    return wallet;
   } catch (err) {
     console.log(err);
   }
@@ -273,7 +271,6 @@ export const addTransaction = async (
     ID.unique(),
     transaction,
   );
-
   if (!newTransaction) {
     throw new Error("Failed to create transaction.");
   }
@@ -483,7 +480,6 @@ export const transferBetweenAccounts = async (
       event: new Date(Date.now()),
       walletId: accountTwoId,
       description: `${description} - sent from ${accountOne.name}`
-
     },
   );
 };

@@ -7,9 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.tsx";
-import { useGetWallets } from "@/lib/react-query/queries&Mutations.tsx";
-import { useUserStore } from "@/zustand/UserStore.tsx";
 import {AiOutlineLoading3Quarters} from "react-icons/ai";
+import {useGetWalletsHook} from "@/components/hooks/WalletHooks/getWalletsHook.tsx";
 
 interface ITransfer {
   transferLabel: string;
@@ -21,11 +20,7 @@ const TransferSelects = ({
   transferValue,
   handleSelectedAccount,
 }: ITransfer) => {
-  const { user } = useUserStore();
-  const { data: wallets, isFetching: isWalletsFetching } = useGetWallets(
-    user?.id || "",
-  );
-
+  const {wallets, isWalletsFetching} = useGetWalletsHook()
   return (
     <div>
       <Label htmlFor="from" className="text-right">

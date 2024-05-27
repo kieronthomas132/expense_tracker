@@ -3,7 +3,7 @@ import {useUserStore} from "@/zustand/UserStore.tsx";
 
 export const useGetWalletsHook = () => {
     const {user} = useUserStore()
-    const { data: wallets } = useGetWallets(user?.id || "");
+    const { data: wallets, isFetching: isWalletsFetching } = useGetWallets(user?.id || "");
 
-    return { wallets };
+    return { wallets, isWalletsFetching};
 };

@@ -46,7 +46,7 @@ const SelectLayout = ({
             categories.map(({ category, icon }, index) => (
               <SelectItem value={category} key={index}>
                 <div className="flex items-center gap-1">
-                  <img src={icon} alt={category} />
+                  <img className='w-[15px]' src={icon} alt={category} />
                   <p>{category}</p>
                 </div>
               </SelectItem>

@@ -30,7 +30,6 @@ const Transaction = ({
   };
 
   return (
-    <>
       <section className="p-4 border-2 border-[#27272A] w-[100%] my-5 rounded-lg">
         <div className="flex items-center gap-5">
           {icon && (
@@ -48,7 +47,6 @@ const Transaction = ({
           </div>
         </div>
       </section>
-    </>
   );
 };
 

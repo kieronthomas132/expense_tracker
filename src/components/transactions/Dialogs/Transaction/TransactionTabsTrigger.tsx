@@ -4,19 +4,19 @@ const TransactionTabsTrigger = () => {
   return (
     <div>
       <TabsTrigger
-        className="rounded-full text-white text-[15px] w-[100px]"
+        className="rounded-full text-white text-[15px] lg:w-[100px]"
         value="expense"
       >
         Expense
       </TabsTrigger>
       <TabsTrigger
-        className="rounded-full text-white text-[15px] w-[100px]"
+        className="rounded-full text-white text-[15px] lg:w-[100px]"
         value="income"
       >
         Income
       </TabsTrigger>
       <TabsTrigger
-        className="rounded-full text-white text-[15px] w-[100px]"
+        className="rounded-full text-white text-[15px] lg:w-[100px]"
         value="transfer"
       >
         Transfer

@@ -1,14 +1,14 @@
-import food from "@/assets/food.svg"
-import work from "@/assets/work.svg";
-import entertainment from "@/assets/entertainment.svg";
-import home from "@/assets/home.svg";
-import travel from "@/assets/travel.svg";
-import subscriptions from "@/assets/subscriptions.svg";
-import clothes from "@/assets/clothes.svg";
-import education from "@/assets/education.svg";
-import personal_care from "@/assets/personal_care.svg";
-import gift from "@/assets/gift.svg";
-import health from "@/assets/health.svg";
+import food from "@/assets/food.png"
+import work from "@/assets/work.png";
+import entertainment from "@/assets/entertainment.png";
+import home from "@/assets/home.png";
+import travel from "@/assets/travel.png";
+import subscriptions from "@/assets/subscriptions.png";
+import clothes from "@/assets/clothes.png";
+import education from "@/assets/education.png";
+import personal_care from "@/assets/personal_care.png";
+import gift from "@/assets/gift.png";
+import health from "@/assets/health.png";
 
 // Define category and category icons
 export const categories = [

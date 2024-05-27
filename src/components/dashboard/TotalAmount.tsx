@@ -9,7 +9,7 @@ const TotalAmount = () => {
       {wallets && wallets?.length > 0 ? (
         <>
           <ul className="flex flex-col gap-4">
-            <ScrollArea className="h-[450px] w-full md:w-[95%] rounded-md">
+            <ScrollArea className="md:h-[450px] h-auto w-full md:w-[95%] rounded-md">
               <div className="mt-5">
                 {wallets.map(({ $id, balance, currency }) => (
                   <li

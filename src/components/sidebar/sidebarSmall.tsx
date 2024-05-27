@@ -20,7 +20,7 @@ const SidebarSmall = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className="md:hidden relative">
+    <nav className="lg:hidden z-10 relative">
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="border-2 border-[#27272A] p-2 rounded-full"

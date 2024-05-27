@@ -17,14 +17,19 @@ const Dashboard = () => {
         <section className="p-4 w-full lg:w-[80%]">
             <div className="flex items-center justify-between full">
                 <h1 className="text-[25px]">Dashboard</h1>
-                <span className='hidden md:flex'>
-                <AddWalletDialog />
+                <span className='hidden lg:flex'>
+                <AddWalletDialog/>
                 </span>
             </div>
-            <DashboardWallets />
+            <DashboardWallets/>
+            <div className='md:hidden mt-4 block'>
+                <TotalAmount/>
+            </div>
             <div className="mt-[30px] grid grid-cols-1 md:grid-cols-2 gap-4">
-                <RecentTransactions />
-                <TotalAmount />
+                <RecentTransactions/>
+                <div className='hidden md:block'>
+                    <TotalAmount/>
+                </div>
             </div>
         </section>
     );

@@ -19,16 +19,21 @@ const Wallet = () => {
         {" "}
         <div className="xl:w-[60%] w-full h-full">
           <WalletHeader/>
-          <div className='flex mt-6 lg:hidden'>
+          <div className='flex mt-6 xl:hidden'>
             <WalletExpectedBalance/>
+          </div>
+          <div className='xl:hidden mt-3'>
+            <LimitByCategory/>
           </div>
           <Transactions/>
         </div>
         <div className="xl:w-[40%] w-full flex flex-col gap-4">
-          <div className='hidden mt-3 lg:flex'>
+          <div className='hidden mt-3 xl:block'>
             <WalletExpectedBalance />
           </div>
-          <LimitByCategory />
+          <div className='hidden xl:block w-full'>
+            <LimitByCategory />
+          </div>
         </div>
       </div>
     </section>
